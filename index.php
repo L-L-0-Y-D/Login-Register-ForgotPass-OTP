@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Login Page</title>
-    <link rel="icon" href="favicon.ico"/>
+    <link rel="icon" href="picture/favicon.ico"/>
 </head>
 <body>
 
     <div class="login-card">
         <div class="logo">
             <!-- <i class='bx bx-bitcoin'></i> -->
-            <img src="pepsi.png" alt="" width="100%" height="100%">
+            <img src="picture/pepsi.png" alt="" width="100%" height="100%">
         </div>
         <h2>Login</h2>
         <h2>Login</h2>
