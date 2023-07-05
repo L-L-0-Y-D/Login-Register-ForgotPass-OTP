@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
     <title>Sign Up Page</title>
     <link rel="icon" href="picture/favicon.ico"/>
 </head>
@@ -17,10 +22,11 @@
         </div>
         <h2>Create Account</h2>
         <form action="authentication.php" class="form-signup" method="post">
-            <input type="text" name="name" placeholder="Name" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit" name="submit">Sign Up</button>
+            <input type="text" name="name" id="name" placeholder="Name" required>
+            <input type="email" name="email" id="email" placeholder="Email" required>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <input type="password" name="passwordConfirm" id="passwordConfirm" placeholder="Confirm Password" required>
+            <button type="submit" name="register" id="register">Sign Up</button>
         </form>
         <footer>
             Already have an account?
@@ -28,6 +34,22 @@
         </footer>
     </div>
 
-    
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+    <?php 
+    if(isset($_SESSION['message'])){ 
+        $message = $_SESSION['message'];
+        $status = $_SESSION['status'];
+
+        displayMessage($message, $status);
+
+        unset($_SESSION['message']);
+        unset($_SESSION['alert']);
+    }
+    ?> 
+    </script>
 </body>
 </html>
