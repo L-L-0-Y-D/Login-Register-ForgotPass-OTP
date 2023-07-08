@@ -160,7 +160,7 @@ body{
     padding-top: 20px;
 }
 
-.card{
+.signup-card{
     overflow: hidden;
     position: relative;
     z-index: 3;
@@ -173,7 +173,7 @@ body{
     box-shadow: 0 100px 100px rgb(0, 0, 0 / 10%);
 }
 
-.card::before{
+.signup-card::before{
     content: "";
     position: absolute;
     background: #10449A;
@@ -185,7 +185,7 @@ body{
     translate: -50% 0;
 }
 
-.card .logo{
+.signup-card .logo{
     position: absolute;
     display: flex;
     align-items: center;
@@ -199,12 +199,12 @@ body{
     translate: -50% 0;
 }
 
-/* .card.logo img{
+/* .signup-card.logo img{
     height: 50%;
     width: 50%;
 } */
 
-.card>h2{
+.signup-card>h2{
     font-size: 40px;
     font-weight: 500;
     margin: 0 0 24px;
@@ -270,6 +270,238 @@ body{
     color: #143d81;
 }
 
+.forgotPassword-card{
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    margin: 0 20px;
+    padding: 70px 30px 44px;
+    border-radius: 1.25rem;
+    /* background: url(pepsi.png); */
+    text-align: center;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    overflow: hidden;
+    box-shadow: 0 100px 100px rgb(0, 0, 0 / 10%);
+
+}
+
+.forgotPassword-card::before{
+    content: "";
+    position: absolute;
+    background: #10449A;
+    top: -880px;
+    left: 50%;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 50%;
+    translate: -50% 0;
+}
+
+.forgotPassword-card .logo{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #fff;
+    height: 64px;
+    width: 64px;
+    top: 30px;
+    left: 50%;
+    translate: -50% 0;
+}
+
+.forgotPassword-card > h2{
+    color: #203380;
+    font-size: 40px;
+    font-weight: 500;
+    margin: 0 0 24px;
+}
+
+.forgotPassword-card > h3{
+    color: #203380;
+    margin: 0 0 30px;
+    font-weight: 500;
+    font-size: 26px;
+}
+
+.forgotPassword-form{
+    width: 100%;
+    margin: 0;
+    display: grid;
+    gap: 16px;
+}
+
+.forgotPassword-form > input, .forgotPassword-form > button{
+    width:100%;
+    height: 50px;
+}
+
+
+.forgotPassword-form > input {
+    border: 2px solid #ebebeb;
+    font-family: inherit;
+    font-size: 15px;
+    padding: 0 16px;
+    border-radius: 1.25rem;
+    transition: all 0.375s
+}
+
+.forgotPassword-form > input:hover{
+    border: 2px solid #203380;
+}
+
+.forgotPassword-form > button{
+    cursor: pointer;
+    width: 100%;
+    padding: 0 16px;
+    border-radius: 1.25rem;
+    background: #203380;
+    color: #f9f9f9;
+    border: 0;
+    font-family: inherit;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 2px;
+    transition: all 0.375s;
+}
+
+.forgotPassword-form > button:hover{
+    background: #10449A;
+}
+
+.forgotPassword-form > a{
+    color: #203380;
+    font-size: 0.9rem;
+    text-align: left;
+    text-decoration: none;
+    margin-bottom: 6px;
+    transition: all 0.375s;
+}
+
+.forgotPassword-form > a:hover{
+    color: #10449A;
+}
+
+.resetPassword-card{
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    margin: 0 20px;
+    padding: 70px 30px 44px;
+    border-radius: 1.25rem;
+    /* background: url(pepsi.png); */
+    text-align: center;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    overflow: hidden;
+    box-shadow: 0 100px 100px rgb(0, 0, 0 / 10%);
+
+}
+
+.resetPassword-card::before{
+    content: "";
+    position: absolute;
+    background: #10449A;
+    top: -880px;
+    left: 50%;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 50%;
+    translate: -50% 0;
+}
+
+.resetPassword-card .logo{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #fff;
+    height: 64px;
+    width: 64px;
+    top: 30px;
+    left: 50%;
+    translate: -50% 0;
+}
+
+.resetPassword-card > h2{
+    color: #203380;
+    font-size: 40px;
+    font-weight: 500;
+    margin: 0 0 24px;
+}
+
+.resetPassword-card > h3{
+    color: #203380;
+    margin: 0 0 30px;
+    font-weight: 500;
+    font-size: 26px;
+}
+
+.resetPassword-form{
+    width: 100%;
+    margin: 0;
+    display: grid;
+    gap: 16px;
+}
+
+.resetPassword-form > input, .resetPassword-form > button{
+    width:100%;
+    height: 50px;
+}
+
+
+.resetPassword-form > input {
+    border: 2px solid #ebebeb;
+    font-family: inherit;
+    font-size: 15px;
+    padding: 0 16px;
+    border-radius: 1.25rem;
+    transition: all 0.375s
+}
+
+.resetPassword-form > input:hover{
+    border: 2px solid #203380;
+}
+
+.resetPassword-form > button{
+    cursor: pointer;
+    width: 100%;
+    padding: 0 16px;
+    border-radius: 1.25rem;
+    background: #203380;
+    color: #f9f9f9;
+    border: 0;
+    font-family: inherit;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 2px;
+    transition: all 0.375s;
+}
+
+.resetPassword-form > button:hover{
+    background: #10449A;
+}
+
+.resetPassword-form > a{
+    color: #203380;
+    font-size: 0.9rem;
+    text-align: left;
+    text-decoration: none;
+    margin-bottom: 6px;
+    transition: all 0.375s;
+}
+
+.resetPassword-form > a:hover{
+    color: #10449A;
+}
+
 @keyframes rotate{
     100%{
         background-position: 15% 50%;
@@ -285,7 +517,15 @@ body{
         width: 600px;
 
     }
-    .card{
+    .signup-card{
+        margin: 0;
+        width: 600px;
+    }
+    .forgotPassword-card{
+        margin: 0;
+        width: 600px;
+    }
+    .resetPassword-card{
         margin: 0;
         width: 600px;
     }

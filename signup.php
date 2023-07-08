@@ -15,7 +15,7 @@
 </head>
 <body>
 
-    <div class="card">
+    <div class="signup-card">
         <div class="logo">
             <!-- <i class='bx bx-bitcoin'></i> -->
             <img src="picture/pepsi.png" alt="" width="100%" height="100%">
@@ -38,18 +38,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="sweetalert2.all.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
-    <?php 
-    if(isset($_SESSION['message'])){ 
-        $message = $_SESSION['message'];
-        $status = $_SESSION['status'];
-
-        displayMessage($message, $status);
-
-        unset($_SESSION['message']);
-        unset($_SESSION['alert']);
-    }
-    ?> 
-    </script>
+    <?php include ('sweetalert.php'); ?>
 </body>
 </html>

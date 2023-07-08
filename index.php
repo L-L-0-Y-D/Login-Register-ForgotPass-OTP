@@ -23,7 +23,7 @@
         <form action="authentication.php" class="login-form" method="post">
             <input type="text" name="username" id="username" placeholder="Username">
             <input type="password" name="password" id="password" placeholder="Password">
-            <a href="forgotpassword.html">Forgot Password</a>
+            <a href="forgotpassword.php">Forgot Password</a>
             <button type="submit" name="login" id="login">LOGIN</button>
         </form>
         <footer class="footer-signin">
@@ -34,27 +34,6 @@
     
     <script src="sweetalert2.all.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
-    <?php 
-    if(isset($_SESSION['message']))    
-        { 
-        ?>
-        // alertify.set('notifier','position', 'top-center');
-        // var msg = alertify.message('Default message');
-        // msg.delay(3).setContent('<?= $_SESSION['message']; ?>');
-
-        swal({
-            title: "<?= $_SESSION['message']; ?>",
-            icon: "<?= $_SESSION['status']; ?>",
-            button: "Okay",
-            timer: 10500,
-            });
-
-        <?php 
-        unset($_SESSION['message']);
-        unset($_SESSION['alert']);
-        }
-    ?> 
-    </script>
+    <?php include ('sweetalert.php'); ?>
 </body>
 </html>

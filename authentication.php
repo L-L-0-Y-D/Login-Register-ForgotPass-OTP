@@ -46,7 +46,8 @@ if(isset($_POST['register'])){
 
                 if($insert_user_query_run){
                     //insert Email function for OTP
-
+                    $otp = rand(10000,99999);
+                    sendOTPMailer($email, $otp);
                     redirect("index.php", "Register Successfully", "success");
 
                 }else{
@@ -67,9 +68,10 @@ if(isset($_POST['register'])){
 
     }
 
-
-
-
+}
+else
+{
+    redirect("index.php", "Something Went Wrong", "error");
 }
 
 ?>
