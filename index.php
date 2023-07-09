@@ -29,9 +29,6 @@
             <a class="footer-redirect-signup" href="signup.php">SIGN UP HERE</a> 
         </footer>
     </div>
-    
-    <script src="sweetalert2.all.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <?php include ('sweetalert.php'); ?>
 </body>
 </html>

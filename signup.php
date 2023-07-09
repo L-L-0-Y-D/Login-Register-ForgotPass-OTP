@@ -33,11 +33,6 @@
             <a class="redirect-signin"href="index.php">Login</a>
         </footer>
     </div>
-
-    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetalert2.all.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <?php include ('sweetalert.php'); ?>
 </body>
 </html>

@@ -4,6 +4,7 @@ SweetAlert library. */
 class MessageDisplay {
     public function displayMessage($message, $status) {
         echo "
+        <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
         <script>
             swal({
                 title: '$message',

@@ -120,7 +120,7 @@ elseif(isset($_POST['login']))
     }
     else
     {
-        $redirectHandler->redirect("index.php?error=incorrect_email||password", "Incorrect Email or Password", "warning");
+        $redirectHandler->redirect("index.php", "Incorrect Email or Password", "warning");
     }
 
 
@@ -149,8 +149,8 @@ elseif(isset($_POST['otpverify'])){
                     'email' => $email
                 ];
 
-                $verify_email_query = "UPDATE user SET status=1 WHERE email='$email'";
-                $verify_email_query_run = mysqli_query($con,$verify_email_query) or die("bad query: $verify_email_query");
+                $update_status_query = "UPDATE user SET status=1 WHERE email='$email'";
+                $update_status_query_run = mysqli_query($con,$update_status_query) or die("bad query: $update_status_query");
                 $redirectHandler->redirect('home.php', "Login Successfully", "success");
             }
         }

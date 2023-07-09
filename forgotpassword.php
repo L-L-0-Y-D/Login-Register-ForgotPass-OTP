@@ -22,9 +22,6 @@
             <button type="submit" name="forgotpassword" id="forgotpassword">Forgot Password</button>
         </form>
     </div>
-    
-    <script src="sweetalert2.all.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <?php include ('sweetalert.php'); ?>
 </body>
 </html>
