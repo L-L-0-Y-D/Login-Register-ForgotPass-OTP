@@ -1,6 +1,7 @@
 <?php
 
 include('functions.php');
+$redirectHandler = new RedirectHandler();
 
 if(isset($_POST['register'])){
     /* The code is using the `mysqli_real_escape_string()` function to escape special characters in the
@@ -10,10 +11,15 @@ if(isset($_POST['register'])){
     object (``) and the user input value (`['name']`, `['email']`,
     `['password']`, `['passwordConfirm']`). The escaped values are then assigned to the
     respective variables (``, ``, ``, ``). */
+    // $NAME = filter_var($_POST['name'], FILTER_SANITIZE_SPECIAL_CHARS);
+    // $EMAIL = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+
     $name = mysqli_real_escape_string($con,$_POST['name']);
     $email = mysqli_real_escape_string($con,$_POST['email']);
     $password = mysqli_real_escape_string($con,$_POST['password']);
     $confirmPassword = mysqli_real_escape_string($con,$_POST['passwordConfirm']);
+
+
 
     /* The line ` = 'name='..'&email='.;` is creating a string that contains the
     user's name and email address. It is used to pass this data as a query parameter in the redirect
@@ -32,7 +38,7 @@ if(isset($_POST['register'])){
         /* The `redirect()` function is used to redirect the user to a different page. In this case, it
         is redirecting the user to the "signup.php" page with additional query parameters in the
         URL. */
-        redirect("signup.php?error=check_email&{$user_data}","Email Already Exists", "warning");
+        $redirectHandler->redirect("signup.php?error=check_email&{$user_data}","Email Already Exists", "warning");
 
     }else{
 
@@ -41,37 +47,123 @@ if(isset($_POST['register'])){
             if(preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#&_$!%*?&])[A-Za-z\d@#&_$!%*?&]{8,}$/",$password)){
 
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-                $insert_user_query = "INSERT INTO user (name, email, password, status) VALUES ('$name', '$email', '$hashed_password', '0')";
+                $otp = rand(00001,99999);
+                $insert_user_query = "INSERT INTO user (name, email, password, status, otp) VALUES ('$name', '$email', '$hashed_password', '0', '$otp')";
                 $insert_user_query_run = mysqli_query($con,$insert_user_query) or die("bad query: $insert_user_query");
 
                 if($insert_user_query_run){
                     //insert Email function for OTP
-                    $otp = rand(10000,99999);
                     sendOTPMailer($email, $otp);
-                    redirect("index.php", "Register Successfully", "success");
+                    $redirectHandler->redirect("index.php", "Register Successfully", "success");
 
                 }else{
 
-                    redirect("signup.php", "Something Went Wrong", "error");
+                    $redirectHandler->redirect("signup.php", "Something Went Wrong", "error");
                 }
 
             }else{
 
-                redirect("signup.php?error=password&{$user_data}","Password Must Contain 8 Characters, 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character", "warning");
+                $redirectHandler->redirect("signup.php?error=password&{$user_data}","Password Must Contain 8 Characters, 1 Uppercase, 1 Lowercase, 1 Number, 1 Special Character", "warning");
             }
             
         }else{
 
-            redirect("signup.php?error=check_password&{$user_data}","Passwords Do Not Match", "warning");
+            $redirectHandler->redirect("signup.php?error=check_password&{$user_data}","Passwords Do Not Match", "warning");
 
         }
 
     }
 
 }
+elseif(isset($_POST['login']))
+{
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $password = $_POST['password'];
+
+    $check_login_query = "SELECT * FROM user WHERE email='$email'";
+    $check_login_query_run = mysqli_query($con,$check_login_query);
+
+    if(mysqli_num_rows($check_login_query_run) > 0)
+    {
+        while($row = mysqli_fetch_assoc($check_login_query_run))
+        {
+            if(password_verify($password, $row['password']) && $row['status']=='0')
+            {
+                $email = $row['email'];
+                $_SESSION['EMAIL'] = $email;
+
+                $redirectHandler->redirect('otpverification.php', "Please Enter your OTP Code", "success");
+
+            }
+            elseif(password_verify($password, $row['password']) && $row['status']=='1')
+            {
+                $_SESSION['auth'] = true;
+                $userid = $row['userid'];
+                $name = $row['name'];
+                $email = $row['email'];
+
+                $_SESSION['auth_user'] = [
+                    'userid' => $userid,
+                    'name' => $name,
+                    'email' => $email
+                ];
+                
+                $redirectHandler->redirect('home.php', "Login Successfully", "success");
+            }
+            else{
+
+                $redirectHandler->redirect("index.php", "Wrong Email or Password", "warning");
+            }
+                            
+        }
+
+    }
+    else
+    {
+        $redirectHandler->redirect("index.php?error=incorrect_email||password", "Incorrect Email or Password", "warning");
+    }
+
+
+}
+elseif(isset($_POST['otpverify'])){
+    $otp = filter_var($_POST['otp'], FILTER_SANITIZE_NUMBER_INT, FILTER_SANITIZE_NUMBER_INT);
+    $email = $_SESSION['EMAIL'];
+
+    $check_email_query = "SELECT * FROM user WHERE email='$email'";
+    $check_email_query_run = mysqli_query($con,$check_email_query);
+
+    if(mysqli_num_rows($check_email_query_run) > 0)
+    {
+        while($row = mysqli_fetch_assoc($check_email_query_run))
+        {
+            if($otp == $row['otp'])
+            {
+                $_SESSION['auth'] = true;
+                $userid = $row['userid'];
+                $name = $row['name'];
+                $email = $row['email'];
+
+                $_SESSION['auth_user'] = [
+                    'userid' => $userid,
+                    'name' => $name,
+                    'email' => $email
+                ];
+
+                $verify_email_query = "UPDATE user SET status=1 WHERE email='$email'";
+                $verify_email_query_run = mysqli_query($con,$verify_email_query) or die("bad query: $verify_email_query");
+                $redirectHandler->redirect('home.php', "Login Successfully", "success");
+            }
+        }
+    }
+    else
+    {
+        $redirectHandler->redirect("otpverification.php", "Please Enter Authentication Code", "warning");
+    }
+
+}
 else
 {
-    redirect("index.php", "Something Went Wrong", "error");
+    $redirectHandler->redirect("index.php", "Something Went Wrong", "error");
 }
 
 ?>
