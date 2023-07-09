@@ -16,12 +16,10 @@
         <div class="logo">
             <!-- <i class='bx bx-bitcoin'></i> -->
             <img src="picture/pepsi.png" alt="" width="100%" height="100%">
-        </div>
+        </div>  
         <h2>Login</h2>
-        <h2>Login</h2>
-
         <form action="authentication.php" class="login-form" method="post">
-            <input type="text" name="username" id="username" placeholder="Username">
+            <input type="email" name="email" id="email" placeholder="Email">
             <input type="password" name="password" id="password" placeholder="Password">
             <a href="forgotpassword.php">Forgot Password</a>
             <button type="submit" name="login" id="login">LOGIN</button>

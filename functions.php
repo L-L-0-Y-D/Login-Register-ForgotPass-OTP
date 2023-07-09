@@ -11,6 +11,14 @@ include('config/dbconfig.php');
     //Load Composer's autoloader
     require 'vendor/autoload.php';
 
+class RedirectHandler {
+    public function redirect($location, $message, $status) {
+        $_SESSION['message'] = $message;
+        $_SESSION['status'] = $status;
+        header('Location: ' . $location);
+        exit();
+    }
+}
 function sendOTPMailer($email, $otp)
 {
 
@@ -50,7 +58,9 @@ function sendOTPMailer($email, $otp)
     $mail->Body    = $email_template;
     $mail->send();
     // echo 'Message has been sent';
-    redirect("../index.php", "Password Reset Link Send Successfully Please Check Your Email", "success");
+    $redirectHandler = new RedirectHandler();
+    $redirectHandler->redirect("../index.php", "Password Reset Link Send Successfully Please Check Your Email", "success");
+    
    
 
 }
@@ -96,18 +106,11 @@ function sendResetPasswordMailer($email, $verify_token)
     $mail->Body    = $email_template;
     $mail->send();
     // echo 'Message has been sent';
-    redirect("../index.php", "Password Reset Link Send Successfully Please Check Your Email", "success");
+    $redirectHandler = new RedirectHandler();
+    $redirectHandler->redirect("../index.php", "Password Reset Link Send Successfully Please Check Your Email", "success");
    
 
 }
 
 
-function redirect($location, $message, $status)
-{
-    $_SESSION['message'] = $message;
-    $_SESSION['status'] = $status;
-    header('Location: '. $location);
-    exit();
-
-}
 
